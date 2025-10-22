@@ -4,3 +4,4 @@ ProductA, ProductB, ProductC  Her ürün için
 Satış verisi alır
 Üretim planını alır 
 Mevcut stok miktarını alır
+Bu üç veriyi kullanarak satın alma ihtiyacını tahmin eder

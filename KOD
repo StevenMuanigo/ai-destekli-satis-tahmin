@@ -1,0 +1,63 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+public class AIPurchasePrediction {
+
+    // Mock method to simulate sales data retrieval
+    private Map<String, Integer> getSalesData() {
+        Map<String, Integer> salesData = new HashMap<>();
+        salesData.put("ProductA", 100);
+        salesData.put("ProductB", 150);
+        salesData.put("ProductC", 200);
+        return salesData;
+    }
+
+    // Mock method to simulate production data retrieval
+    private Map<String, Integer> getProductionData() {
+        Map<String, Integer> productionData = new HashMap<>();
+        productionData.put("ProductA", 120);
+        productionData.put("ProductB", 140);
+        productionData.put("ProductC", 220);
+        return productionData;
+    }
+
+    // Mock method to simulate stock data retrieval
+    private Map<String, Integer> getStockData() {
+        Map<String, Integer> stockData = new HashMap<>();
+        stockData.put("ProductA", 50);
+        stockData.put("ProductB", 70);
+        stockData.put("ProductC", 80);
+        return stockData;
+    }
+
+    // Method to calculate purchase predictions
+    private Map<String, Integer> calculatePurchasePrediction() {
+        Map<String, Integer> salesData = getSalesData();
+        Map<String, Integer> productionData = getProductionData();
+        Map<String, Integer> stockData = getStockData();
+        Map<String, Integer> purchasePrediction = new HashMap<>();
+
+        for (String product : salesData.keySet()) {
+            int sales = salesData.get(product);
+            int production = productionData.get(product);
+            int stock = stockData.get(product);
+
+            // Simple prediction model: Factor in sales, production, and stock
+            int prediction = (sales + production - stock) / 3 + new Random().nextInt(20);
+
+            purchasePrediction.put(product, Math.max(prediction, 0));
+        }
+
+        return purchasePrediction;
+    }
+
+    public static void main(String[] args) {
+        AIPurchasePrediction aiPurchasePrediction = new AIPurchasePrediction();
+        
+        Map<String, Integer> prediction = aiPurchasePrediction.calculatePurchasePrediction();
+        
+        System.out.println("Purchase Predictions:");
+        prediction.forEach((product, value) -> System.out.println(product + ": " + value));
+    }
+}
